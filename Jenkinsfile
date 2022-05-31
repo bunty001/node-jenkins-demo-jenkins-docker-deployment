@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     def dockerImage = docker.build("antonml/node-demo:master")
-                    docker.withRegistry('', 'demo-docker') {
+                    docker.withRegistry('', 'dockerpeerbits001') {
                         dockerImage.push('master')
                     }
                 }
@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Deploy to remote docker host') {
             environment {
-                DOCKER_HOST_CREDENTIALS = credentials('demo-docker')
+                DOCKER_HOST_CREDENTIALS = credentials('dockerpeerbits001')
             }
             steps {
                 script {
